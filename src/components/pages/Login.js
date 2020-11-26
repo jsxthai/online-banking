@@ -9,9 +9,16 @@ import Lock from "@material-ui/icons/Lock";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useRef, useState } from "react";
 import { authLogin } from "../../api/loginApi";
+import { useCookies } from "react-cookie";
 
 const Login = () => {
     const reRef = useRef();
+    const [cookies, setCookie, removeCookie] = useCookies(["thai"]);
+    // console.log(cookies.thai);
+    // setCookie("thai", "thai pham", {
+    //     pathL: "/",
+    // });
+    // removeCookie("thai");
     const [loginData, setLoginData] = useState(() => {
         return {
             username: "",
