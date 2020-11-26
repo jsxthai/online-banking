@@ -13,7 +13,7 @@ import { useCookies } from "react-cookie";
 
 const Login = () => {
     const reRef = useRef();
-    const [cookies, setCookie, removeCookie] = useCookies(["thai"]);
+    const [cookies, setCookie, removeCookie] = useCookies();
     // console.log(cookies.thai);
     // setCookie("thai", "thai pham", {
     //     pathL: "/",
@@ -32,7 +32,15 @@ const Login = () => {
         reRef.current.reset();
 
         authLogin(token, loginData)
-            .then((response) => console.log(response))
+            .then((response) => {
+                console.log(response);
+                if (response.data.accessToken) {
+                    console.log(typeof response.data.accessToken);
+                    setCookie("accessToken", response.data.accessToken);
+                } else {
+                    console.log("token from server is null");
+                }
+            })
             .catch((err) => console.log(err.response));
     };
 
