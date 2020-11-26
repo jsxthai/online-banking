@@ -1,32 +1,39 @@
 import PropTypes from "prop-types";
-import {
-    Button,
-    Grid,
-    Hidden,
-    InputAdornment,
-    TextField,
-} from "@material-ui/core";
-import { AccountCircle, Lock } from "@material-ui/icons";
+import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid";
+import Hidden from "@material-ui/core/Hidden";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import TextField from "@material-ui/core/TextField";
+import AccountCircle from "@material-ui/icons/AccountCircle";
+import Lock from "@material-ui/icons/Lock";
 import ReCAPTCHA from "react-google-recaptcha";
-import { useRef } from "react";
-import axios from "axios";
+import { useRef, useState } from "react";
+import { authLogin } from "../../api/loginApi";
 
 const Login = () => {
     const reRef = useRef();
+    const [loginData, setLoginData] = useState(() => {
+        return {
+            username: "",
+            password: "",
+        };
+    });
 
     const onSubmitWithReCAPTCHA = async (e) => {
         e.preventDefault();
         const token = await reRef.current.executeAsync();
-        // console.log(token);
         reRef.current.reset();
-        // post to server
-        const apiUrl = "http://localhost:7777/api/auth-recaptcha";
-        axios
-            .post(apiUrl, {
-                token,
-            })
-            .then((res) => console.log("res:", res.data))
-            .catch((err) => console.log("err", err.response));
+
+        authLogin(token, loginData)
+            .then((response) => console.log(response))
+            .catch((err) => console.log(err.response));
+    };
+
+    const onChangeInputLogin = (e) => {
+        setLoginData({
+            ...loginData,
+            [e.target.name]: e.target.value,
+        });
     };
 
     return (
@@ -55,11 +62,17 @@ const Login = () => {
                 justify="center"
                 alignItems="center"
             >
-                <Grid item xs={10} sm={12} md={6}>
+                <Grid item xs={8} sm={6} md={6}>
+                    <Hidden smUp>
+                        <div style={{ height: "50px" }}></div>
+                    </Hidden>
                     <form onSubmit={onSubmitWithReCAPTCHA}>
                         <h1 style={{ textAlign: "center" }}>Online banking</h1>
                         <div style={{ height: "20px" }}></div>
                         <TextField
+                            name="username"
+                            onChange={onChangeInputLogin}
+                            value={loginData.username}
                             fullWidth
                             label="Username"
                             margin="normal"
@@ -73,6 +86,9 @@ const Login = () => {
                             }}
                         ></TextField>
                         <TextField
+                            name="password"
+                            onChange={onChangeInputLogin}
+                            value={loginData.password}
                             fullWidth
                             label="Password"
                             margin="normal"
