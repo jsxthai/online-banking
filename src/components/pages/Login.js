@@ -12,13 +12,12 @@ import { authLogin } from "../../api/loginApi";
 import { useCookies } from "react-cookie";
 
 const Login = () => {
-    const reRef = useRef();
-    const [cookies, setCookie, removeCookie] = useCookies();
-    // console.log(cookies.thai);
-    // setCookie("thai", "thai pham", {
-    //     pathL: "/",
-    // });
-    // removeCookie("thai");
+    const reRef = useRef(); // ref recaptcha
+
+    const [cookies, setCookie] = useCookies();
+    if (cookies) {
+        // null
+    }
     const [loginData, setLoginData] = useState(() => {
         return {
             username: "",

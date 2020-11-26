@@ -1,11 +1,10 @@
 import Login from "./components/pages/Login";
+import Home from "./components/pages/Home";
 
 function App() {
-    return (
-        <>
-            <Login />
-        </>
-    );
+    const stateLogin = false;
+
+    return <>{stateLogin ? <Login /> : <Home />}</>;
 }
 
 export default App;
