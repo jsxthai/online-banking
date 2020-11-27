@@ -74,6 +74,7 @@ export default function MiniDrawer() {
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
+    const fullname = "Thai Pham";
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -105,7 +106,7 @@ export default function MiniDrawer() {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" noWrap>
-                        Well come user 1
+                        Hello {fullname}
                     </Typography>
                 </Toolbar>
             </AppBar>

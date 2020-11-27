@@ -20,13 +20,14 @@ function App() {
         // if token -> await loading
         if (accessToken) {
             dispatch(loginWithJWT(accessToken));
-            return <h3>Loading .......</h3>;
+            // return <h3>Loading .......</h3>;
         }
     }
 
     // role === 'admin' -> return <Dashboard>
     //  <Dashboard> đã làm ở project trước
-    return <>{isLogin === true && role === "user" ? <Home /> : <Login />}</>;
+    // return <>{isLogin === true && role === "user" ? <Home /> : <Login />}</>;
+    return <Home />;
 }
 
 export default App;
