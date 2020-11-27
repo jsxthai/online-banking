@@ -1,6 +1,6 @@
 import Grid from "@material-ui/core/Grid";
 import Title from "../Title";
-import FolderList from "../FolderList";
+import FolderList from "../ListAccount";
 
 export default function DashBoard() {
     return (
