@@ -7,10 +7,12 @@ import { loginWithJWT } from "./actions/loginWithJWT";
 
 function App() {
     const isLogin = useSelector((state) => state.loginReducer["isLogin"]);
+    const role = useSelector((state) => state.loginReducer["role"]);
     const [cookies] = useCookies(["accessToken"]);
     const dispatch = useDispatch();
     // console.log("token:", cookies.accessToken);
-    console.log("is login", isLogin);
+    // console.log("is login", isLogin);
+    // console.log("role ", role);
 
     // check token and login with token
     if (!isLogin) {
@@ -22,7 +24,9 @@ function App() {
         }
     }
 
-    return <>{isLogin === true ? <Home /> : <Login />}</>;
+    // role === 'admin' -> return <Dashboard>
+    //  <Dashboard> đã làm ở project trước
+    return <>{isLogin === true && role === "user" ? <Home /> : <Login />}</>;
 }
 
 export default App;

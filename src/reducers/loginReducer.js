@@ -8,6 +8,7 @@ const initialState = {
     isLogin: false,
     status: 0,
     accessToken: "",
+    role: "",
 };
 
 export default function loginReducer(state = initialState, action) {
@@ -17,9 +18,11 @@ export default function loginReducer(state = initialState, action) {
                 isLogin: true,
                 status: 200,
                 accessToken: action.payload.accessToken,
+                role: action.payload.role,
             };
         case SET_LOGOUT:
             return {
+                ...state,
                 isLogin: false,
                 status: 0,
                 accessToken: "",
