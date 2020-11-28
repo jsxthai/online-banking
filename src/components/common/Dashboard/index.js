@@ -6,19 +6,18 @@ import { useEffect, useState } from "react";
 import { fetchInfoAccount } from "../../../actions/fetchInfoAccount";
 
 export default function DashBoard() {
-    const account = useSelector((state) => state.loginReducer["fullname"]);
-    console.log("acc", account);
+    const account = useSelector((state) => state.loginReducer["accountNumber"]);
+    const accountLists = useSelector((state) => state.accountList);
     const dispatch = useDispatch();
-    const [accountLists, setAccountList] = useState({});
+    // const [listsAcc, setListsAcc] = useState({});
 
     useEffect(() => {
-        dispatch(fetchInfoAccount());
-    }, []);
-
+        dispatch(fetchInfoAccount(account));
+    }, [account]);
     return (
         <Grid item xs={12} sm={8} md={6}>
             <Title>Account</Title>
-            <ListAccount />
+            <ListAccount accountLists={accountLists} />
         </Grid>
     );
 }

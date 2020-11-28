@@ -26,9 +26,33 @@ const useStyles = makeStyles({
     },
 });
 
-export default function SimpleCard() {
+export default function SimpleCard(props) {
     const classes = useStyles();
 
+    const objAcc = props.accountLists;
+    console.log("savign", objAcc);
+    console.log(objAcc.savingsAccount.length);
+
+    const row = objAcc.savingsAccount.map((item, index) => {
+        return (
+            <div key={index}>
+                <CardContent>
+                    <Typography
+                        className={classes.title}
+                        color="textSecondary"
+                        gutterBottom
+                    >
+                        Saving account {index + 1}
+                    </Typography>
+                    <Typography variant="body2" component="p"></Typography>
+                    <div className={classes.flexContainer}>
+                        <p>{item.number}</p> <b>{item.mount} VND</b>
+                    </div>
+                </CardContent>
+                {index !== objAcc.savingsAccount.length - 1 ? <hr /> : ""}
+            </div>
+        );
+    });
     return (
         <>
             <Card className={classes.root}>
@@ -38,17 +62,19 @@ export default function SimpleCard() {
                         color="textSecondary"
                         gutterBottom
                     >
-                        Tài khoản thanh toán
+                        Account number
                     </Typography>
                     <Typography variant="body2" component="p"></Typography>
                     <div className={classes.flexContainer}>
-                        <p>126565846464</p> <b>999999 $</b>
+                        <p>{objAcc.accountNumber}</p>{" "}
+                        <b>{objAcc.balance} VND</b>
                     </div>
                 </CardContent>
             </Card>
             <br />
             <Card>
-                <CardContent>
+                {row}
+                {/* <CardContent>
                     <Typography
                         className={classes.title}
                         color="textSecondary"
@@ -61,7 +87,6 @@ export default function SimpleCard() {
                         <p>126565846464</p> <b>999999 $</b>
                     </div>
                 </CardContent>
-                <hr />
                 <CardContent>
                     <Typography
                         className={classes.title}
@@ -74,7 +99,7 @@ export default function SimpleCard() {
                     <div className={classes.flexContainer}>
                         <p>126565846464</p> <b>999999 $</b>
                     </div>
-                </CardContent>
+                </CardContent> */}
             </Card>
         </>
     );

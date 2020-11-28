@@ -6,7 +6,7 @@ export const fetchInfoAccount = (accountNumber) => async (dispatch) => {
         const response = await api.fetchInfoAccount(accountNumber);
         const payload = response.data;
         if (payload) {
-            dispatch({ type: SET_ACCOUNT_LISTS }, payload);
+            dispatch({ type: SET_ACCOUNT_LISTS, payload: payload });
         }
     } catch (error) {}
 };

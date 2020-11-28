@@ -3,7 +3,7 @@ import Home from "./components/pages/Home";
 import { useDispatch, useSelector } from "react-redux";
 import { useCookies } from "react-cookie";
 import { loginWithJWT } from "./actions/loginWithJWT";
-import { renewToken } from "./actions/renewToken";
+// import { renewToken } from "./actions/renewToken";
 
 function App() {
     const dispatch = useDispatch();
@@ -14,10 +14,7 @@ function App() {
 
     // use component will mount sẽ  ko phải render 2 lần khi đăng nhập bằng jwt token
     if (!isLogin) {
-        if (accessToken) {
-            dispatch(renewToken());
-            dispatch(loginWithJWT(accessToken));
-        }
+        dispatch(loginWithJWT(accessToken));
     }
 
     return <>{isLogin === true && role === "user" ? <Home /> : <Login />}</>;
