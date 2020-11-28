@@ -40,14 +40,10 @@ export default function SimpleCard() {
                     >
                         Tài khoản thanh toán
                     </Typography>
-
-                    <Typography
-                        variant="body2"
-                        component="p"
-                        className={classes.flexContainer}
-                    >
-                        <p>126565846464</p> <b>999999$</b>
-                    </Typography>
+                    <Typography variant="body2" component="p"></Typography>
+                    <div className={classes.flexContainer}>
+                        <p>126565846464</p> <b>999999 $</b>
+                    </div>
                 </CardContent>
             </Card>
             <br />
@@ -60,13 +56,10 @@ export default function SimpleCard() {
                     >
                         Tài khoản tiết kiệm 1
                     </Typography>
-                    <Typography
-                        variant="body2"
-                        component="p"
-                        className={classes.flexContainer}
-                    >
-                        <p>126565846464</p> <b>999999$</b>
-                    </Typography>
+                    <Typography variant="body2" component="p"></Typography>
+                    <div className={classes.flexContainer}>
+                        <p>126565846464</p> <b>999999 $</b>
+                    </div>
                 </CardContent>
                 <hr />
                 <CardContent>
@@ -77,13 +70,10 @@ export default function SimpleCard() {
                     >
                         Tài khoản tiết kiệm 2
                     </Typography>
-                    <Typography
-                        variant="body2"
-                        component="p"
-                        className={classes.flexContainer}
-                    >
-                        <p>126565846464</p> <b>999999$</b>
-                    </Typography>
+                    <Typography variant="body2" component="p"></Typography>
+                    <div className={classes.flexContainer}>
+                        <p>126565846464</p> <b>999999 $</b>
+                    </div>
                 </CardContent>
             </Card>
         </>

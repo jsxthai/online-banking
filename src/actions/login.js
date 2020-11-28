@@ -12,10 +12,6 @@ export const loginWithRecaptcha = (recaptchaToken, loginData) => async (
                 payload: { status: 401 },
             });
         } else {
-            if (response.data.accessToken) {
-                document.cookie = `accessToken=${response.data.accessToken}`;
-            }
-            // không có token vẫn đăng nhập vì username and pass đúng
             dispatch({
                 type: SET_LOGIN_SUCCESS,
                 payload: response.data,

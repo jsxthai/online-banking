@@ -1,9 +1,9 @@
-import * as api from "../api/loginWithJWT";
+import * as api from "../api/renewToken";
 import { SET_LOGIN_ERROR, SET_LOGIN_SUCCESS } from "../constants/actionTypes";
 
-export const loginWithJWT = (accessToken) => async (dispatch) => {
+export const renewToken = (accessToken) => async (dispatch) => {
     try {
-        const response = await api.loginWithJWT(accessToken);
+        const response = await api.renewToken(accessToken);
         if (response.data.status === 401) {
             dispatch({
                 type: SET_LOGIN_ERROR,
@@ -14,6 +14,7 @@ export const loginWithJWT = (accessToken) => async (dispatch) => {
                 type: SET_LOGIN_SUCCESS,
                 payload: response.data,
             });
+            // server auto set cookie access token
         }
     } catch (error) {
         // console.log(error.response);

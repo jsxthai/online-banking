@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
-import Dashboard from "../common/Dashboard";
+import Dashboard from "../common/DashBoard";
 import { Grid } from "@material-ui/core";
 import MiniDrawer from "../common/MiniDrawer";
 
