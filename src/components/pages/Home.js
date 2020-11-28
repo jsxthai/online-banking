@@ -32,7 +32,7 @@ export default function Home() {
                 <div className={classes.toolbar} />
                 <Grid container justify="center">
                     {/* // */}
-                    <Dashboard />
+                    <Dashboard infoAccountList={"s"} />
                     {/* // */}
                 </Grid>
             </main>

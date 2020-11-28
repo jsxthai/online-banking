@@ -1,5 +1,6 @@
 import * as api from "../api/login";
 import { SET_LOGIN_ERROR, SET_LOGIN_SUCCESS } from "../constants/actionTypes";
+import jwt_decode from "jwt-decode";
 
 export const loginWithRecaptcha = (recaptchaToken, loginData) => async (
     dispatch
@@ -12,9 +13,13 @@ export const loginWithRecaptcha = (recaptchaToken, loginData) => async (
                 payload: { status: 401 },
             });
         } else {
+            const token = response.data.accessToken;
+            const payload = jwt_decode(token);
+            document.cookie = `accessToken=${token}`;
+
             dispatch({
                 type: SET_LOGIN_SUCCESS,
-                payload: response.data,
+                payload: payload,
             });
         }
     } catch (error) {
