@@ -73,6 +73,10 @@ const useStyles = makeStyles((theme) => ({
     secondaryColor: {
         color: "#f50057",
     },
+    activeColor: {
+        background: " linear-gradient(to right, #000428, #004e92)",
+        color: "#f4f4f4",
+    },
 }));
 
 export default function MiniDrawer() {
@@ -94,7 +98,7 @@ export default function MiniDrawer() {
             <CssBaseline />
             <AppBar
                 position="fixed"
-                className={clsx(classes.appBar, {
+                className={clsx(classes.appBar, classes.activeColor, {
                     [classes.appBarShift]: open,
                 })}
             >

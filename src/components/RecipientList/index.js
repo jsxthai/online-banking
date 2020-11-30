@@ -16,6 +16,7 @@ import {
 } from "../../actions/recipientList";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
+import formatN from "../../helpers/formatNumber";
 
 const RecipientList = () => {
     const recipientList = useSelector((state) => state.recipientLists);
@@ -42,7 +43,7 @@ const RecipientList = () => {
                     <TableCell component="th" scope="row">
                         {index + 1}
                     </TableCell>
-                    <TableCell align="left">{row.number}</TableCell>
+                    <TableCell align="left">{formatN(row.number)}</TableCell>
                     <TableCell align="left">{row.name}</TableCell>
                     <TableCell align="center">
                         <Button
@@ -116,7 +117,7 @@ const RecipientList = () => {
     };
 
     return (
-        <Grid item xs={12} sm={8} md={6}>
+        <Grid item xs={12} sm={10} md={8}>
             <Button
                 variant="contained"
                 color="primary"

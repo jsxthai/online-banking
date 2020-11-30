@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
+import formatN from "../../helpers/formatNumber";
 
 const useStyles = makeStyles({
     root: {
@@ -30,8 +31,6 @@ export default function SimpleCard(props) {
     const classes = useStyles();
 
     const objAcc = props.accountLists;
-    // console.log("savign", objAcc);
-    // console.log(objAcc.savingsAccount.length);
 
     const row = objAcc.savingsAccount.map((item, index) => {
         return (
@@ -42,11 +41,18 @@ export default function SimpleCard(props) {
                         color="textSecondary"
                         gutterBottom
                     >
-                        Saving account {index + 1}
+                        Savings account {index + 1}
                     </Typography>
                     <Typography variant="body2" component="p"></Typography>
                     <div className={classes.flexContainer}>
-                        <p>{item.number}</p> <b>{item.mount} VND</b>
+                        <p>{formatN(item.number)}</p>{" "}
+                        <b>
+                            {item.mount.toLocaleString("it-IT", {
+                                // style: "currency",
+                                currency: "VND",
+                            })}{" "}
+                            VND
+                        </b>
                     </div>
                 </CardContent>
                 {index !== objAcc.savingsAccount.length - 1 ? <hr /> : ""}
@@ -66,40 +72,21 @@ export default function SimpleCard(props) {
                     </Typography>
                     <Typography variant="body2" component="p"></Typography>
                     <div className={classes.flexContainer}>
-                        <p>{objAcc.accountNumber}</p>{" "}
-                        <b>{objAcc.balance} VND</b>
+                        <p>{formatN(objAcc.accountNumber)}</p>{" "}
+                        <b>
+                            {objAcc.balance.toLocaleString("it-IT", {
+                                currency: "VND",
+                            })}{" "}
+                            VND
+                        </b>
                     </div>
                 </CardContent>
             </Card>
             <br />
             <Card>
+                {/*  */}
                 {row}
-                {/* <CardContent>
-                    <Typography
-                        className={classes.title}
-                        color="textSecondary"
-                        gutterBottom
-                    >
-                        Tài khoản tiết kiệm 1
-                    </Typography>
-                    <Typography variant="body2" component="p"></Typography>
-                    <div className={classes.flexContainer}>
-                        <p>126565846464</p> <b>999999 $</b>
-                    </div>
-                </CardContent>
-                <CardContent>
-                    <Typography
-                        className={classes.title}
-                        color="textSecondary"
-                        gutterBottom
-                    >
-                        Tài khoản tiết kiệm 2
-                    </Typography>
-                    <Typography variant="body2" component="p"></Typography>
-                    <div className={classes.flexContainer}>
-                        <p>126565846464</p> <b>999999 $</b>
-                    </div>
-                </CardContent> */}
+                {/*  */}
             </Card>
         </>
     );

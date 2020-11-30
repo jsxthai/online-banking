@@ -21,7 +21,6 @@ export const loginWithJWT = (accessToken) => async (dispatch) => {
             });
         }
     } catch (error) {
-        // console.log(error.response);
         dispatch({
             type: SET_LOGIN_ERROR,
             payload: { status: 401 },

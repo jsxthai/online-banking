@@ -26,7 +26,6 @@ export const addRecipient = (accountNumber, data) => {
 };
 
 /// delete If a DELETE request includes an entity body, the body is ignored [...]
-//
 export const deleteARecipient = (accountNumber, data) => {
     return axios.delete(
         `${uri}/api/v2/recipient-lists/${accountNumber}?number=${data.number}&name=${data.name}`

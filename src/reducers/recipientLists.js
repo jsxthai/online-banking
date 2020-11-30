@@ -1,3 +1,5 @@
+import { GET_RECIPIENT_LISTS } from "../constants/actionTypes";
+
 const initialState = [];
 
 export default function recipientReducer(
@@ -5,7 +7,7 @@ export default function recipientReducer(
     { type, payload }
 ) {
     switch (type) {
-        case "GET_RECIPIENT_LISTS":
+        case GET_RECIPIENT_LISTS:
             return payload.recipient;
 
         default:

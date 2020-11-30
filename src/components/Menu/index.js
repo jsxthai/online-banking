@@ -7,7 +7,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import AccountBalanceIcon from "@material-ui/icons/AccountBalance";
-import LanguageIcon from "@material-ui/icons/Language";
+// import LanguageIcon from "@material-ui/icons/Language";
 import MoneyOffIcon from "@material-ui/icons/MoneyOff";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { useHistory } from "react-router-dom";
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
         color: "#f50057",
     },
     activeColor: {
-        background: " linear-gradient(to right, #396afc, #2948ff)",
+        background: "linear-gradient(to right, #000428, #004e92)",
         color: "#f4f4f4",
     },
 }));
@@ -38,10 +38,10 @@ export default function Menu() {
         history.push("/internal-transfer");
         setIsActive("nal");
     }
-    function handleClickInterbank() {
-        history.push("/interbank");
-        setIsActive("int");
-    }
+    // function handleClickInterbank() {
+    //     history.push("/interbank");
+    //     setIsActive("int");
+    // }
     function handleClickDebtReminder() {
         history.push("/debt-reminder");
         setIsActive("deb");
@@ -77,7 +77,7 @@ export default function Menu() {
                     </ListItemIcon>
                     <ListItemText primary={"Internal Transfer"} />
                 </ListItem>
-                <ListItem
+                {/* <ListItem
                     button
                     onClick={handleClickInterbank}
                     className={isActive === "int" ? classes.activeColor : ""}
@@ -86,7 +86,7 @@ export default function Menu() {
                         <LanguageIcon />
                     </ListItemIcon>
                     <ListItemText primary={"Interbank"} />
-                </ListItem>
+                </ListItem> */}
                 <ListItem
                     button
                     onClick={handleClickDebtReminder}
