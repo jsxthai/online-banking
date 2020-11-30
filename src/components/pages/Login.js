@@ -8,16 +8,13 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import Lock from "@material-ui/icons/Lock";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useRef, useState } from "react";
-import { authLogin } from "../../api/loginApi";
-import { useCookies } from "react-cookie";
+import { useDispatch } from "react-redux";
+import { loginWithRecaptcha } from "../../actions/login";
 
 const Login = () => {
     const reRef = useRef(); // ref recaptcha
+    const dispatch = useDispatch();
 
-    const [cookies, setCookie] = useCookies();
-    if (cookies) {
-        // null
-    }
     const [loginData, setLoginData] = useState(() => {
         return {
             username: "",
@@ -25,22 +22,12 @@ const Login = () => {
         };
     });
 
-    const onSubmitWithReCAPTCHA = async (e) => {
+    const onSubmitLogin = async (e) => {
         e.preventDefault();
         const token = await reRef.current.executeAsync();
         reRef.current.reset();
 
-        authLogin(token, loginData)
-            .then((response) => {
-                console.log(response);
-                if (response.data.accessToken) {
-                    console.log(typeof response.data.accessToken);
-                    setCookie("accessToken", response.data.accessToken);
-                } else {
-                    console.log("token from server is null");
-                }
-            })
-            .catch((err) => console.log(err.response));
+        dispatch(loginWithRecaptcha(token, loginData));
     };
 
     const onChangeInputLogin = (e) => {
@@ -80,10 +67,11 @@ const Login = () => {
                     <Hidden smUp>
                         <div style={{ height: "50px" }}></div>
                     </Hidden>
-                    <form onSubmit={onSubmitWithReCAPTCHA}>
+                    <form onSubmit={onSubmitLogin}>
                         <h1 style={{ textAlign: "center" }}>Online banking</h1>
                         <div style={{ height: "20px" }}></div>
                         <TextField
+                            required
                             name="username"
                             onChange={onChangeInputLogin}
                             value={loginData.username}
@@ -100,6 +88,7 @@ const Login = () => {
                             }}
                         ></TextField>
                         <TextField
+                            required
                             name="password"
                             onChange={onChangeInputLogin}
                             value={loginData.password}
@@ -145,13 +134,6 @@ const Login = () => {
 
 // learn write prop types
 const propTypes = {
-    // arrayItem: PropTypes.arrayOf(
-    //     PropTypes.shape({
-    //         id: PropTypes.number.isRequired,
-    //         username: PropTypes.string.isRequired,
-    //         password: PropTypes.string.isRequired,
-    //     })
-    // ).isRequired,
     onLogin: PropTypes.func,
 };
 
