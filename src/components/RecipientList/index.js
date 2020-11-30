@@ -8,7 +8,14 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { Button, Grid, TextField } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchRecipientLists } from "../../actions/fetchRecipientList";
+import {
+    addRecipient,
+    fetchRecipientLists,
+    updateARecipient,
+    deleteARecipient,
+} from "../../actions/recipientList";
+import EditIcon from "@material-ui/icons/Edit";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 const RecipientList = () => {
     const recipientList = useSelector((state) => state.recipientLists);
@@ -42,8 +49,9 @@ const RecipientList = () => {
                             color="primary"
                             variant="contained"
                             onClick={() => handleClickRow(row, "edit")}
+                            size="small"
                         >
-                            E
+                            <EditIcon fontSize="small" />
                         </Button>
                     </TableCell>
                     <TableCell align="center">
@@ -51,8 +59,9 @@ const RecipientList = () => {
                             color="secondary"
                             variant="contained"
                             onClick={() => handleClickRow(row, "del")}
+                            size="small"
                         >
-                            X
+                            <DeleteIcon fontSize="small" />
                         </Button>
                     </TableCell>
                 </TableRow>
@@ -61,30 +70,39 @@ const RecipientList = () => {
         }
     }, [recipientList]);
 
-    const handleClickRow = (row, type) => {
-        console.log(type, row);
+    const handleClickRow = async (row, type) => {
+        // console.log(type, row);
         if (type === "edit") {
             setStateAddOrEdit("edit");
             setIsTable(!isTable);
             setItemFocus(row);
+            // handle edit
         } else if (type === "del") {
             // handle del
+            if (window.confirm("Do you really want to DELETE?")) {
+                await dispatch(deleteARecipient(accountNumber, row));
+                dispatch(fetchRecipientLists(accountNumber));
+            }
         }
     };
 
     const handleClickAddNew = () => {
         setStateAddOrEdit("add");
         setIsTable(!isTable);
-        setItemFocus({});
+        setItemFocus({ number: "", name: "" });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (stateAddOrEdit === "edit") {
-            // // check không có thay đổi thì ko update
+            // check không có thay đổi thì ko update
+            await dispatch(updateARecipient(accountNumber, itemFocus));
+            dispatch(fetchRecipientLists(accountNumber));
         } else if (stateAddOrEdit === "add") {
             //
+            await dispatch(addRecipient(accountNumber, itemFocus));
+            //  console.log("dis add", itemFocus);
         }
 
         setIsTable(!isTable);

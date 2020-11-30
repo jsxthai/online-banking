@@ -17,6 +17,7 @@ export default function accountListReducer(
                 balance: payload.balance,
                 savingsAccount: payload.savingsAccount,
             };
+
         default:
             return state;
     }
