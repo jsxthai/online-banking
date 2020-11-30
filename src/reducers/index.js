@@ -1,8 +1,10 @@
 import { combineReducers } from "redux";
 import loginReducer from "./loginReducer";
-import accountList from "./accountList";
+import accountLists from "./accountLists";
+import recipientLists from "./recipientLists";
 
 export default combineReducers({
     loginReducer,
-    accountList,
+    accountLists,
+    recipientLists,
 });

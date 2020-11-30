@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -7,6 +7,8 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { Button, Grid, TextField } from "@material-ui/core";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchRecipientLists } from "../../actions/fetchRecipientList";
 
 function createData(name, calories, fat, carbs, protein) {
     return { name, calories, fat, carbs, protein };
@@ -18,8 +20,19 @@ const rows = [
     createData("Eclair", 262, 16.0, 24, 6.0),
 ];
 const RecipientList = () => {
+    const recipientList = useSelector((state) => state.recipientLists);
+    const accountNumber = useSelector(
+        (state) => state.loginReducer["accountNumber"]
+    );
+    console.log("list:", recipientList);
+    console.log("acc:", accountNumber);
     const [isTable, setIsTable] = useState(true);
     const [stateAddOrEdit, setStateAddOrEdit] = useState("add");
+
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(fetchRecipientLists(accountNumber));
+    }, []);
 
     const handleClickRow = (row, type) => {
         console.log(type, row);
@@ -34,9 +47,13 @@ const RecipientList = () => {
         setIsTable(!isTable);
     };
 
-    const handleAddOrEdit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
         if (stateAddOrEdit === "edit") {
+            //
         } else if (stateAddOrEdit === "add") {
+            //
         }
 
         setIsTable(!isTable);
@@ -49,36 +66,39 @@ const RecipientList = () => {
                 color="primary"
                 onClick={handleClickAddNew}
             >
-                {isTable ? "add" : "close"}
+                {isTable ? "+ Add" : "Close"}
             </Button>
             <br />
             <br />
 
             {!isTable ? (
                 <>
-                    <TextField
-                        name="account"
-                        fullWidth
-                        label="Account"
-                        margin="normal"
-                    />
-                    <TextField
-                        name="name"
-                        fullWidth
-                        label="Name"
-                        margin="normal"
-                    />
-                    <div style={{ height: "20px" }}></div>
+                    <form onSubmit={handleSubmit}>
+                        <TextField
+                            name="account"
+                            fullWidth
+                            label="Account"
+                            margin="normal"
+                            required
+                        />
+                        <TextField
+                            name="name"
+                            fullWidth
+                            label="Name"
+                            margin="normal"
+                            required
+                        />
+                        <div style={{ height: "20px" }}></div>
 
-                    <Button
-                        fullWidth
-                        color="primary"
-                        type="submit"
-                        variant="contained"
-                        onClick={() => handleAddOrEdit()}
-                    >
-                        {stateAddOrEdit === "add" ? "Add new" : "Update"}
-                    </Button>
+                        <Button
+                            fullWidth
+                            color="primary"
+                            type="submit"
+                            variant="contained"
+                        >
+                            {stateAddOrEdit === "add" ? "Add new" : "Update"}
+                        </Button>
+                    </form>
                 </>
             ) : (
                 <>
@@ -116,7 +136,7 @@ const RecipientList = () => {
                                                     handleClickRow(row, "edit")
                                                 }
                                             >
-                                                A
+                                                E
                                             </Button>
                                         </TableCell>
                                         <TableCell align="center">
