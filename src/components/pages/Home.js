@@ -1,9 +1,9 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-
+import { Route, BrowerRouter as Router } from "react-router-dom";
 import Dashboard from "../common/DashBoard";
 import { Grid } from "@material-ui/core";
-import MiniDrawer from "../common/MiniDrawer";
+import Nav from "../common/Nav";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -27,7 +27,7 @@ export default function Home() {
 
     return (
         <div className={classes.root}>
-            <MiniDrawer />
+            <Nav />
             <main className={classes.content}>
                 <div className={classes.toolbar} />
                 <Grid container justify="center">

@@ -68,12 +68,23 @@ const useStyles = makeStyles((theme) => ({
             width: theme.spacing(9) + 1,
         },
     },
+    toolbar: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "flex-end",
+        padding: theme.spacing(0, 1),
+        // necessary for content to be below app bar
+        ...theme.mixins.toolbar,
+    },
+    secondaryColor: {
+        color: "#f50057",
+    },
 }));
 
 export default function MiniDrawer() {
     const classes = useStyles();
     const theme = useTheme();
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = React.useState(true);
     const fullname = "Thai Pham";
 
     const handleDrawerOpen = () => {
@@ -134,34 +145,43 @@ export default function MiniDrawer() {
                 </div>
                 <Divider />
                 <List>
-                    {[
-                        "Dashboard",
-                        "Internal Transfer",
-                        "Interbank",
-                        "Debt Reminder",
-                    ].map((text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemIcon>
-                                {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
-                                {index === 0 ? <DashboardIcon /> : ""}
-                                {index === 1 ? <AccountBalanceIcon /> : ""}
-                                {index === 2 ? <LanguageIcon /> : ""}
-                                {index === 3 ? <MoneyOffIcon /> : ""}
-                            </ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItem>
-                    ))}
+                    <ListItem button>
+                        <ListItemIcon>
+                            <DashboardIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={"Dasboard"} />
+                    </ListItem>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <AccountBalanceIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={"Internal Transfer"} />
+                    </ListItem>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <LanguageIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={"Interbank"} />
+                    </ListItem>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <MoneyOffIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={"Debt Reminder"} />
+                    </ListItem>
                 </List>
+
                 <Divider />
                 <List>
-                    {["Logout"].map((text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemIcon>
-                                {index % 2 === 0 ? <ExitToAppIcon /> : ""}
-                            </ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItem>
-                    ))}
+                    <ListItem button>
+                        <ListItemIcon>
+                            <ExitToAppIcon color="secondary" />
+                        </ListItemIcon>
+                        <ListItemText
+                            primary={"Logout"}
+                            className={classes.secondaryColor}
+                        />
+                    </ListItem>
                 </List>
             </Drawer>
         </>
