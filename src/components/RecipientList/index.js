@@ -1,5 +1,4 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import React, { useState } from "react";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -7,7 +6,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import { Button, Grid } from "@material-ui/core";
+import { Button, Grid, TextField } from "@material-ui/core";
 
 function createData(name, calories, fat, carbs, protein) {
     return { name, calories, fat, carbs, protein };
@@ -19,48 +18,125 @@ const rows = [
     createData("Eclair", 262, 16.0, 24, 6.0),
 ];
 const RecipientList = () => {
+    const [isTable, setIsTable] = useState(true);
+    const [stateAddOrEdit, setStateAddOrEdit] = useState("add");
+
+    const handleClickRow = (row, type) => {
+        console.log(type, row);
+        if (type === "edit") {
+            setStateAddOrEdit("edit");
+            setIsTable(!isTable);
+        }
+    };
+
+    const handleClickAddNew = () => {
+        setStateAddOrEdit("add");
+        setIsTable(!isTable);
+    };
+
+    const handleAddOrEdit = () => {
+        if (stateAddOrEdit === "edit") {
+        } else if (stateAddOrEdit === "add") {
+        }
+
+        setIsTable(!isTable);
+    };
+
     return (
         <Grid item xs={12} sm={8} md={6}>
-            <TableContainer component={Paper}>
-                <Table aria-label="caption table">
-                    {/* <caption>A basic table example with a caption</caption> */}
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>Index</TableCell>
-                            <TableCell align="left">Account number</TableCell>
-                            <TableCell align="left">Name</TableCell>
-                            <TableCell align="center">Edit</TableCell>
-                            <TableCell align="center">Delete</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {rows.map((row) => (
-                            <TableRow key={row.name}>
-                                <TableCell component="th" scope="row">
-                                    {row.name}
-                                </TableCell>
-                                <TableCell align="left">
-                                    {row.calories}
-                                </TableCell>
-                                <TableCell align="left">{row.fat}</TableCell>
-                                <TableCell align="center">
-                                    <Button color="primary" variant="contained">
-                                        A
-                                    </Button>
-                                </TableCell>
-                                <TableCell align="center">
-                                    <Button
-                                        color="secondary"
-                                        variant="contained"
-                                    >
-                                        X
-                                    </Button>
-                                </TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
+            <Button
+                variant="contained"
+                color="primary"
+                onClick={handleClickAddNew}
+            >
+                {isTable ? "add" : "close"}
+            </Button>
+            <br />
+            <br />
+
+            {!isTable ? (
+                <>
+                    <TextField
+                        name="account"
+                        fullWidth
+                        label="Account"
+                        margin="normal"
+                    />
+                    <TextField
+                        name="name"
+                        fullWidth
+                        label="Name"
+                        margin="normal"
+                    />
+                    <div style={{ height: "20px" }}></div>
+
+                    <Button
+                        fullWidth
+                        color="primary"
+                        type="submit"
+                        variant="contained"
+                        onClick={() => handleAddOrEdit()}
+                    >
+                        {stateAddOrEdit === "add" ? "Add new" : "Update"}
+                    </Button>
+                </>
+            ) : (
+                <>
+                    <TableContainer component={Paper}>
+                        <Table aria-label="caption table">
+                            {/* <caption>A basic table example with a caption</caption> */}
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell>Index</TableCell>
+                                    <TableCell align="left">
+                                        Account number
+                                    </TableCell>
+                                    <TableCell align="left">Name</TableCell>
+                                    <TableCell align="center">Edit</TableCell>
+                                    <TableCell align="center">Delete</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {rows.map((row) => (
+                                    <TableRow key={row.name}>
+                                        <TableCell component="th" scope="row">
+                                            {row.name}
+                                        </TableCell>
+                                        <TableCell align="left">
+                                            {row.calories}
+                                        </TableCell>
+                                        <TableCell align="left">
+                                            {row.fat}
+                                        </TableCell>
+                                        <TableCell align="center">
+                                            <Button
+                                                color="primary"
+                                                variant="contained"
+                                                onClick={() =>
+                                                    handleClickRow(row, "edit")
+                                                }
+                                            >
+                                                A
+                                            </Button>
+                                        </TableCell>
+                                        <TableCell align="center">
+                                            <Button
+                                                color="secondary"
+                                                variant="contained"
+                                                onClick={() =>
+                                                    handleClickRow(row, "del")
+                                                }
+                                            >
+                                                X
+                                            </Button>
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                </>
+            )}
         </Grid>
     );
 };
