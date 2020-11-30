@@ -2,7 +2,7 @@ import Grid from "@material-ui/core/Grid";
 import Title from "../common/Title";
 import ListAccount from "../common/ListAccount";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { fetchInfoAccount } from "../../actions/fetchInfoAccount";
 
 export default function DashBoard() {

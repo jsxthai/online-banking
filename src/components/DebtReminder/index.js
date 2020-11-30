@@ -1,11 +1,14 @@
+import { Grid } from "@material-ui/core";
 import Title from "../common/Title";
 
 const DebtReminder = () => {
     return (
-        <div>
-            <Title>Debt</Title>
-            <h1>Internal Transfer</h1>;
-        </div>
+        <Grid item xs={12} sm={8} md={6}>
+            <Title>Interbank 24/7</Title>
+            <Title>Interbank 24/7</Title>
+            <Title>Interbank 24/7</Title>
+            <Title>Interbank 24/7</Title>
+        </Grid>
     );
 };
 

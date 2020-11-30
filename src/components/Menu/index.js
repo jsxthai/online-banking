@@ -13,6 +13,7 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../../actions/logout";
+import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
 
 const useStyles = makeStyles((theme) => ({
     secondaryColor: {
@@ -36,7 +37,9 @@ export default function Menu() {
     function handleClickDebtReminder() {
         history.push("/debt-reminder");
     }
-
+    function handleClickRecipientList() {
+        history.push("/recipient-list");
+    }
     const dispatch = useDispatch();
     function handleClickLogout() {
         dispatch(logout());
@@ -67,6 +70,12 @@ export default function Menu() {
                         <MoneyOffIcon />
                     </ListItemIcon>
                     <ListItemText primary={"Debt Reminder"} />
+                </ListItem>
+                <ListItem button onClick={handleClickRecipientList}>
+                    <ListItemIcon>
+                        <PlaylistAddIcon />
+                    </ListItemIcon>
+                    <ListItemText primary={"Recipient List"} />
                 </ListItem>
             </List>
 

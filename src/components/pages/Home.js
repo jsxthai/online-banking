@@ -1,14 +1,14 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Dashboard from "../DashBoard";
 import { Grid } from "@material-ui/core";
 import Nav from "../Nav";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import DashBoard from "../DashBoard";
 import InternalTransfer from "../InternalTransfer";
 import InterBank from "../InterBank";
 import DebtReminder from "../DebtReminder";
 import News from "../common/News";
+import RecipientList from "../RecipientList";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -57,6 +57,11 @@ export default function Home() {
                                 path="/debt-reminder"
                                 exact
                                 component={DebtReminder}
+                            />
+                            <Route
+                                path="/recipient-list"
+                                exact
+                                component={RecipientList}
                             />
                         </Switch>
                     </Grid>

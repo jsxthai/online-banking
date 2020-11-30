@@ -111,7 +111,7 @@ export default function MiniDrawer() {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" noWrap>
-                        Hello - {fullname}
+                        Hi - {fullname}
                     </Typography>
                 </Toolbar>
             </AppBar>

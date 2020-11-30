@@ -30,8 +30,8 @@ export default function SimpleCard(props) {
     const classes = useStyles();
 
     const objAcc = props.accountLists;
-    console.log("savign", objAcc);
-    console.log(objAcc.savingsAccount.length);
+    // console.log("savign", objAcc);
+    // console.log(objAcc.savingsAccount.length);
 
     const row = objAcc.savingsAccount.map((item, index) => {
         return (
