@@ -7,10 +7,10 @@ import { fetchInfoAccount } from "../../actions/fetchInfoAccount";
 
 export default function DashBoard() {
     const account = useSelector((state) => state.loginReducer["accountNumber"]);
-    const accountLists = useSelector((state) => state.accountList);
+    const accountLists = useSelector((state) => state.accountLists);
     const dispatch = useDispatch();
     // const [listsAcc, setListsAcc] = useState({});
-
+    console.log("acc", accountLists);
     useEffect(() => {
         dispatch(fetchInfoAccount(account));
     }, [account]);

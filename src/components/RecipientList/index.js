@@ -18,6 +18,10 @@ const RecipientList = () => {
     const [isTable, setIsTable] = useState(true);
     const [stateAddOrEdit, setStateAddOrEdit] = useState("add");
     const [rows, setRows] = useState("");
+    const [itemFocus, setItemFocus] = useState({
+        number: "",
+        name: "",
+    });
 
     const dispatch = useDispatch();
     useEffect(() => {
@@ -62,24 +66,41 @@ const RecipientList = () => {
         if (type === "edit") {
             setStateAddOrEdit("edit");
             setIsTable(!isTable);
+            setItemFocus(row);
+        } else if (type === "del") {
+            // handle del
         }
     };
 
     const handleClickAddNew = () => {
         setStateAddOrEdit("add");
         setIsTable(!isTable);
+        setItemFocus({});
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        const reState = itemFocus;
         if (stateAddOrEdit === "edit") {
-            //
+            // // check không có thay đổi thì ko update
+            // lifecicle should update
+            if (reState !== itemFocus) {
+                console.log(reState);
+                console.log(itemFocus);
+            }
         } else if (stateAddOrEdit === "add") {
             //
         }
 
         setIsTable(!isTable);
+    };
+
+    const onChangeInput = (e) => {
+        setItemFocus({
+            ...itemFocus,
+            [e.target.name]: e.target.value,
+        });
     };
 
     return (
@@ -98,11 +119,13 @@ const RecipientList = () => {
                 <>
                     <form onSubmit={handleSubmit}>
                         <TextField
-                            name="account"
+                            name="number"
                             fullWidth
-                            label="Account"
+                            label="Account number"
                             margin="normal"
                             required
+                            value={itemFocus.number}
+                            onChange={onChangeInput}
                         />
                         <TextField
                             name="name"
@@ -110,6 +133,8 @@ const RecipientList = () => {
                             label="Name"
                             margin="normal"
                             required
+                            value={itemFocus.name}
+                            onChange={onChangeInput}
                         />
                         <div style={{ height: "20px" }}></div>
 
@@ -140,42 +165,9 @@ const RecipientList = () => {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
+                                {/* // */}
                                 {rows || null}
-                                {/* {rows.map((row) => (
-                                    <TableRow key={row.name}>
-                                        <TableCell component="th" scope="row">
-                                            {row.name}
-                                        </TableCell>
-                                        <TableCell align="left">
-                                            {row.calories}
-                                        </TableCell>
-                                        <TableCell align="left">
-                                            {row.fat}
-                                        </TableCell>
-                                        <TableCell align="center">
-                                            <Button
-                                                color="primary"
-                                                variant="contained"
-                                                onClick={() =>
-                                                    handleClickRow(row, "edit")
-                                                }
-                                            >
-                                                E
-                                            </Button>
-                                        </TableCell>
-                                        <TableCell align="center">
-                                            <Button
-                                                color="secondary"
-                                                variant="contained"
-                                                onClick={() =>
-                                                    handleClickRow(row, "del")
-                                                }
-                                            >
-                                                X
-                                            </Button>
-                                        </TableCell>
-                                    </TableRow>
-                                ))} */}
+                                {/* // */}
                             </TableBody>
                         </Table>
                     </TableContainer>
