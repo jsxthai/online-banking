@@ -6,10 +6,7 @@ export default function recipientReducer(
 ) {
     switch (type) {
         case "GET_RECIPIENT_LISTS":
-            console.log("[]", ...payload.recipient);
-            return {
-                ...payload.recipient,
-            };
+            return payload.recipient;
 
         default:
             return state;

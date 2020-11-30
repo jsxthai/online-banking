@@ -10,29 +10,52 @@ import { Button, Grid, TextField } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchRecipientLists } from "../../actions/fetchRecipientList";
 
-function createData(name, calories, fat, carbs, protein) {
-    return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-    createData("Frozen ", 159, 6.0, 24, 4.0),
-    createData("Ice  ", 237, 9.0, 37, 4.3),
-    createData("Eclair", 262, 16.0, 24, 6.0),
-];
 const RecipientList = () => {
     const recipientList = useSelector((state) => state.recipientLists);
     const accountNumber = useSelector(
         (state) => state.loginReducer["accountNumber"]
     );
-    console.log("list:", recipientList);
-    console.log("acc:", accountNumber);
     const [isTable, setIsTable] = useState(true);
     const [stateAddOrEdit, setStateAddOrEdit] = useState("add");
+    const [rows, setRows] = useState("");
 
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(fetchRecipientLists(accountNumber));
     }, []);
+
+    useEffect(() => {
+        if (recipientList.length > 0) {
+            const row = recipientList.map((row, index) => (
+                <TableRow key={row.number + index + 1}>
+                    <TableCell component="th" scope="row">
+                        {index}
+                    </TableCell>
+                    <TableCell align="left">{row.number}</TableCell>
+                    <TableCell align="left">{row.name}</TableCell>
+                    <TableCell align="center">
+                        <Button
+                            color="primary"
+                            variant="contained"
+                            onClick={() => handleClickRow(row, "edit")}
+                        >
+                            E
+                        </Button>
+                    </TableCell>
+                    <TableCell align="center">
+                        <Button
+                            color="secondary"
+                            variant="contained"
+                            onClick={() => handleClickRow(row, "del")}
+                        >
+                            X
+                        </Button>
+                    </TableCell>
+                </TableRow>
+            ));
+            setRows(row);
+        }
+    }, [recipientList]);
 
     const handleClickRow = (row, type) => {
         console.log(type, row);
@@ -117,7 +140,8 @@ const RecipientList = () => {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {rows.map((row) => (
+                                {rows || null}
+                                {/* {rows.map((row) => (
                                     <TableRow key={row.name}>
                                         <TableCell component="th" scope="row">
                                             {row.name}
@@ -151,7 +175,7 @@ const RecipientList = () => {
                                             </Button>
                                         </TableCell>
                                     </TableRow>
-                                ))}
+                                ))} */}
                             </TableBody>
                         </Table>
                     </TableContainer>
