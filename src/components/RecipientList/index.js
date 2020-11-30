@@ -33,7 +33,7 @@ const RecipientList = () => {
             const row = recipientList.map((row, index) => (
                 <TableRow key={row.number + index + 1}>
                     <TableCell component="th" scope="row">
-                        {index}
+                        {index + 1}
                     </TableCell>
                     <TableCell align="left">{row.number}</TableCell>
                     <TableCell align="left">{row.name}</TableCell>
@@ -81,14 +81,8 @@ const RecipientList = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const reState = itemFocus;
         if (stateAddOrEdit === "edit") {
             // // check không có thay đổi thì ko update
-            // lifecicle should update
-            if (reState !== itemFocus) {
-                console.log(reState);
-                console.log(itemFocus);
-            }
         } else if (stateAddOrEdit === "add") {
             //
         }
