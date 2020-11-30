@@ -71,6 +71,7 @@ const Login = () => {
                         <h1 style={{ textAlign: "center" }}>Online banking</h1>
                         <div style={{ height: "20px" }}></div>
                         <TextField
+                            required
                             name="username"
                             onChange={onChangeInputLogin}
                             value={loginData.username}
@@ -87,6 +88,7 @@ const Login = () => {
                             }}
                         ></TextField>
                         <TextField
+                            required
                             name="password"
                             onChange={onChangeInputLogin}
                             value={loginData.password}

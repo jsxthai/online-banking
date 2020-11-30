@@ -4,7 +4,6 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
@@ -12,14 +11,9 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import DashboardIcon from "@material-ui/icons/Dashboard";
-import AccountBalanceIcon from "@material-ui/icons/AccountBalance";
-import LanguageIcon from "@material-ui/icons/Language";
-import MoneyOffIcon from "@material-ui/icons/MoneyOff";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+
+import Menu from "../Menu";
+import { useSelector } from "react-redux";
 
 const drawerWidth = 240;
 
@@ -85,7 +79,7 @@ export default function MiniDrawer() {
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(true);
-    const fullname = "Thai Pham";
+    const fullname = useSelector((state) => state.loginReducer.fullname);
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -117,7 +111,7 @@ export default function MiniDrawer() {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" noWrap>
-                        Hello {fullname}
+                        Hello - {fullname}
                     </Typography>
                 </Toolbar>
             </AppBar>
@@ -144,45 +138,10 @@ export default function MiniDrawer() {
                     </IconButton>
                 </div>
                 <Divider />
-                <List>
-                    <ListItem button>
-                        <ListItemIcon>
-                            <DashboardIcon />
-                        </ListItemIcon>
-                        <ListItemText primary={"Dasboard"} />
-                    </ListItem>
-                    <ListItem button>
-                        <ListItemIcon>
-                            <AccountBalanceIcon />
-                        </ListItemIcon>
-                        <ListItemText primary={"Internal Transfer"} />
-                    </ListItem>
-                    <ListItem button>
-                        <ListItemIcon>
-                            <LanguageIcon />
-                        </ListItemIcon>
-                        <ListItemText primary={"Interbank"} />
-                    </ListItem>
-                    <ListItem button>
-                        <ListItemIcon>
-                            <MoneyOffIcon />
-                        </ListItemIcon>
-                        <ListItemText primary={"Debt Reminder"} />
-                    </ListItem>
-                </List>
 
-                <Divider />
-                <List>
-                    <ListItem button>
-                        <ListItemIcon>
-                            <ExitToAppIcon color="secondary" />
-                        </ListItemIcon>
-                        <ListItemText
-                            primary={"Logout"}
-                            className={classes.secondaryColor}
-                        />
-                    </ListItem>
-                </List>
+                {/* // */}
+                <Menu />
+                {/* // */}
             </Drawer>
         </>
     );

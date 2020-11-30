@@ -1,9 +1,14 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Route, BrowerRouter as Router } from "react-router-dom";
-import Dashboard from "../common/DashBoard";
+import Dashboard from "../DashBoard";
 import { Grid } from "@material-ui/core";
-import Nav from "../common/Nav";
+import Nav from "../Nav";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import DashBoard from "../DashBoard";
+import InternalTransfer from "../InternalTransfer";
+import InterBank from "../InterBank";
+import DebtReminder from "../DebtReminder";
+import News from "../common/News";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -26,16 +31,37 @@ export default function Home() {
     const classes = useStyles();
 
     return (
-        <div className={classes.root}>
-            <Nav />
-            <main className={classes.content}>
-                <div className={classes.toolbar} />
-                <Grid container justify="center">
-                    {/* // */}
-                    <Dashboard infoAccountList={"s"} />
-                    {/* // */}
-                </Grid>
-            </main>
-        </div>
+        <Router>
+            <div className={classes.root}>
+                <Nav />
+                <main className={classes.content}>
+                    <div className={classes.toolbar} />
+                    <Grid container justify="center">
+                        <Switch>
+                            <Route path="/" exact component={News} />
+                            <Route
+                                path="/dashboard"
+                                exact
+                                component={DashBoard}
+                            />
+                            <Route
+                                path="/internal-transfer"
+                                component={InternalTransfer}
+                            />
+                            <Route
+                                path="/interbank"
+                                exact
+                                component={InterBank}
+                            />
+                            <Route
+                                path="/debt-reminder"
+                                exact
+                                component={DebtReminder}
+                            />
+                        </Switch>
+                    </Grid>
+                </main>
+            </div>
+        </Router>
     );
 }
