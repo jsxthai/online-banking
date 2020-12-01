@@ -9,6 +9,8 @@ import {
 } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { createOtp } from "../../helpers/otp";
+import { hash } from "../../helpers/validateOtp";
+import { useDispatch } from "react-redux";
 
 // PropTypes
 const propTypes = {
@@ -20,6 +22,7 @@ const defaultProps = {
 };
 
 const FormTransfer = (props) => {
+    const dispatch = useDispatch();
     const [selectRecipient, setSelectRecipient] = useState({
         number: "",
     });
@@ -31,9 +34,12 @@ const FormTransfer = (props) => {
         });
     };
 
-    const handleSubmitTransfer = (e) => {
+    const handleSubmitTransfer = async (e) => {
         e.preventDefault();
         const otp = createOtp();
+        const originHash = await hash(otp, props.infoAccount.email);
+        // console.log(originHash);
+        dispatch({ type: "SET_ORIGIN_HASH", payload: originHash });
         alert(otp);
     };
 

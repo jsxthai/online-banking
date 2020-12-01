@@ -1,5 +1,5 @@
 const initialState = {
-    isWaitingOtp: false,
+    isWaitingOTP: false,
     hash: "",
 };
 
@@ -8,8 +8,11 @@ export default function internalTransfer(
     { type, payload }
 ) {
     switch (type) {
-        case "":
-            return state;
+        case "SET_ORIGIN_HASH":
+            return {
+                isWaitingOTP: true,
+                hash: payload,
+            };
         default:
             return state;
     }

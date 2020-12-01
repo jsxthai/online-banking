@@ -8,8 +8,8 @@ import crypto from "crypto-js";
  *
  */
 
-const secretKey = process.env.SECRET_KET_OTP || "ioakdjaOTP"; // test
-console.log("sec", secretKey);
+const secretKey = process.env.SECRET_KET_OTP || "ioakdjaOTPlocal"; // test
+// console.log("sec", secretKey);
 
 // const ttl = 5 * 60 * 1000; // 5 minutes in milisecons
 // exp = Date.now() + ttl (milisecons)
@@ -28,6 +28,7 @@ export const hash = (otp, email, exp) => {
 
     // originHash = dajsdkasldasdakslda.1989252556
     const originHash = `${hash}.${exp}`;
+    console.log(originHash);
     return originHash;
 };
 
@@ -36,14 +37,16 @@ export const hash = (otp, email, exp) => {
 export const verify = (otp, email, originHash) => {
     const [hash, exp] = originHash.split(".");
     const now = Date.now();
-
+    console.log(hash, parseInt(exp), now);
     // expires
-    if (exp > now) {
+    if (parseInt(exp) < now) {
+        console.log("exp");
         return false;
     }
     const data = `${email}.${otp}.${exp}`;
     // crypto of reactjs return object => .toString()
     const newHash = crypto.HmacSHA256(data, secretKey).toString();
+    console.log(hash, newHash);
     if (hash === newHash) {
         return true;
     } else {
