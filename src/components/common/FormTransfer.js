@@ -40,7 +40,7 @@ const FormTransfer = (props) => {
         const originHash = await hash(otp, props.infoAccount.email);
         // console.log(originHash);
         dispatch({ type: "SET_ORIGIN_HASH", payload: originHash });
-        alert(otp);
+        alert(otp); ////////////////// send otp to email user
     };
 
     useEffect(() => {

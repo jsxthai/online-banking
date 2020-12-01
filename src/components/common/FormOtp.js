@@ -14,8 +14,9 @@ const FormOtp = (props) => {
             props.infoAccount.email,
             props.originHash
         );
-        console.log(otpNumber, props.infoAccount.email, props.originHash);
+        // console.log(otpNumber, props.infoAccount.email, props.originHash);
         if (isOTP) {
+            // dispatch lại set waiting false, and ......
             alert("otp true");
         } else {
             alert("otp false");

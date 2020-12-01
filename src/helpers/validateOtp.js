@@ -16,7 +16,7 @@ const secretKey = process.env.SECRET_KET_OTP || "ioakdjaOTPlocal"; // test
 export const hash = (otp, email, exp) => {
     // create expt if null
     if (!exp) {
-        const ttl = 5 * 60 * 1000;
+        const ttl = 1 * 60 * 1000; // 1 min // text
         exp = Date.now() + ttl;
     }
 
@@ -28,7 +28,7 @@ export const hash = (otp, email, exp) => {
 
     // originHash = dajsdkasldasdakslda.1989252556
     const originHash = `${hash}.${exp}`;
-    console.log(originHash);
+    // console.log(originHash);
     return originHash;
 };
 
@@ -37,16 +37,16 @@ export const hash = (otp, email, exp) => {
 export const verify = (otp, email, originHash) => {
     const [hash, exp] = originHash.split(".");
     const now = Date.now();
-    console.log(hash, parseInt(exp), now);
+    // console.log(hash, parseInt(exp), now);
     // expires
     if (parseInt(exp) < now) {
-        console.log("exp");
+        // console.log("expires");
         return false;
     }
     const data = `${email}.${otp}.${exp}`;
     // crypto of reactjs return object => .toString()
     const newHash = crypto.HmacSHA256(data, secretKey).toString();
-    console.log(hash, newHash);
+    // console.log(hash, newHash);
     if (hash === newHash) {
         return true;
     } else {
