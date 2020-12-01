@@ -1,5 +1,13 @@
 import crypto from "crypto-js";
 
+// in project
+/**
+ * use HMAC and SHA256
+ * HMAC: đảm bảo tính toàn vẹn dữ liệu, hash with secret key
+ * SHA256: Blockchain, 256 bit, hash, no decoded
+ *
+ */
+
 const secretKey = process.env.SECRET_KET_OTP || "ioakdjaOTP"; // test
 console.log("sec", secretKey);
 

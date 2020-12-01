@@ -1,5 +1,6 @@
 const initialState = {
     isWaitingOtp: false,
+    hash: "",
 };
 
 export default function internalTransfer(
