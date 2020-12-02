@@ -11,6 +11,9 @@ import { useEffect, useState } from "react";
 import { createOtp } from "../../helpers/otp";
 import { hash } from "../../helpers/validateOtp";
 import { useDispatch } from "react-redux";
+import emailjs from "emailjs-com";
+import { init } from "emailjs-com";
+init("user_VsSTDePhTNnJM2kZfuqHf");
 
 // PropTypes
 const propTypes = {
@@ -41,6 +44,31 @@ const FormTransfer = (props) => {
         // console.log(originHash);
         dispatch({ type: "SET_ORIGIN_HASH", payload: originHash });
         alert(otp); ////////////////// send otp to email user
+        const templateParams = {
+            fullname: props.infoAccount.fullname,
+            otp: otp,
+        };
+
+        console.log("target", e.target);
+        console.log("tem", templateParams);
+        const service_id = "service_gsfl6u3";
+        const template_id = "template_1k69xoo";
+
+        // sendForm => send
+        const result = await emailjs.send(
+            service_id,
+            template_id,
+            templateParams
+        );
+        console.log("result ", result);
+        // .then(
+        //     (result) => {
+        //         console.log("Send mail SUCCESS", result.text);
+        //     },
+        //     (error) => {
+        //         console.log("Send mail FAILED", error.text);
+        //     }
+        // );
     };
 
     useEffect(() => {
