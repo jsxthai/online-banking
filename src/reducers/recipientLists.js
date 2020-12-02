@@ -1,6 +1,13 @@
-import { GET_RECIPIENT_LISTS } from "../constants/actionTypes";
+import {
+    GET_RECIPIENT_LISTS,
+    SET_ADD_RECIPIENT_FAIL,
+    SET_ADD_RECIPIENT_SUCCESS,
+} from "../constants/actionTypes";
 
-const initialState = [];
+const initialState = {
+    lists: [],
+    isAdd: false,
+};
 
 export default function recipientReducer(
     state = initialState,
@@ -8,8 +15,20 @@ export default function recipientReducer(
 ) {
     switch (type) {
         case GET_RECIPIENT_LISTS:
-            return payload.recipient;
-
+            return {
+                ...state,
+                lists: payload.recipient,
+            };
+        case SET_ADD_RECIPIENT_FAIL:
+            return {
+                ...state,
+                isAdd: false,
+            };
+        case SET_ADD_RECIPIENT_SUCCESS:
+            return {
+                ...state,
+                isAdd: true,
+            };
         default:
             return state;
     }
