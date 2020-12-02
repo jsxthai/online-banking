@@ -14,6 +14,10 @@ import { useDispatch } from "react-redux";
 import emailjs from "emailjs-com";
 import { init } from "emailjs-com";
 import { useCookies } from "react-cookie";
+import {
+    SET_ORIGIN_HASH,
+    SET_INFO_TRANSFER,
+} from "../../constants/actionTypes";
 const user_mail_id =
     process.env.REACT_APP_USER_MAIL_ID || "user_VsSTDePhTNnJM2kZfuqHf"; // test
 init(user_mail_id);
@@ -66,8 +70,12 @@ const FormTransfer = (props) => {
         const otp = createOtp();
         const originHash = await hash(otp, props.infoAccount.email);
         // console.log(originHash);
-        dispatch({ type: "SET_ORIGIN_HASH", payload: originHash });
-        alert(otp); ////////////////// send otp to email user
+        dispatch({ type: SET_ORIGIN_HASH, payload: originHash });
+        // Test nhanh không qua mail
+        alert(
+            "This otp sent to email of account, check again\nOTP testing: " +
+                otp
+        );
         const templateParams = {
             fullname: props.infoAccount.fullname,
             otp: otp,
@@ -99,7 +107,7 @@ const FormTransfer = (props) => {
             sign: cookie.accessToken || "inertnal bank",
             date: Date.now(),
         };
-        dispatch({ type: "SET_INFO_TRANSFER", payload: infoExecute });
+        dispatch({ type: SET_INFO_TRANSFER, payload: infoExecute });
 
         // console.log("infoExecute", infoExecute);
     };

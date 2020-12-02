@@ -1,11 +1,16 @@
 import * as api from "../api/recipientList";
+import {
+    GET_RECIPIENT_LISTS,
+    SET_ADD_RECIPIENT_SUCCESS,
+    SET_ADD_RECIPIENT_FAIL,
+} from "../constants/actionTypes";
 
 export const fetchRecipientLists = (accountNumber) => async (dispatch) => {
     try {
         const response = await api.fetchRecipientLists(accountNumber);
         const payload = response.data;
         if (payload) {
-            dispatch({ type: "GET_RECIPIENT_LISTS", payload: payload });
+            dispatch({ type: GET_RECIPIENT_LISTS, payload: payload });
         }
     } catch (error) {}
 };
@@ -31,14 +36,14 @@ export const addRecipient = (accountNumber, data) => async (dispatch) => {
         const payload = response.data;
         // console.log("oayload", payload);
         if (payload) {
-            dispatch({ type: "GET_RECIPIENT_LISTS", payload: payload });
-            dispatch({ type: "SET_ADD_RECIPIENT_SUCCESS" });
+            dispatch({ type: GET_RECIPIENT_LISTS, payload: payload });
+            dispatch({ type: SET_ADD_RECIPIENT_SUCCESS });
         }
     } catch (error) {
         if (error.response.data.msg === "account recipient not found") {
             alert("Account recipient not found");
         }
-        dispatch({ type: "SET_ADD_RECIPIENT_FAIL" });
+        dispatch({ type: SET_ADD_RECIPIENT_FAIL });
         console.log(error.response);
     }
 };

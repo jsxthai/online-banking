@@ -5,6 +5,7 @@ import { useState } from "react";
 import { verify } from "../../helpers/validateOtp";
 import { useDispatch, useSelector } from "react-redux";
 import { executeTransfer } from "../../actions/internalTransfer";
+import { CANCEL_TRANSFER, FINAL_TRANSFER } from "../../constants/actionTypes";
 
 const FormOtp = (props) => {
     const [otp, setOtp] = useState("");
@@ -21,7 +22,7 @@ const FormOtp = (props) => {
         }
 
         const otpNumber = parseInt(otp);
-        console.log(otpNumber);
+        // console.log(otpNumber);
         const isOTP = verify(
             otpNumber,
             props.infoAccount.email,
@@ -47,7 +48,7 @@ const FormOtp = (props) => {
             );
 
             // set final waiting otp, re load main layout transfer
-            dispatch({ type: "FINAL_TRANSFER" });
+            dispatch({ type: FINAL_TRANSFER });
 
             alert("OTP is true.\nTransaction success.\nThank you use app.");
         } else {
@@ -57,7 +58,7 @@ const FormOtp = (props) => {
 
     const handleCancelTrans = () => {
         if (window.confirm("You want cancel this transaction ?")) {
-            dispatch({ type: "CANCEL_TRANSFER" });
+            dispatch({ type: CANCEL_TRANSFER });
         }
     };
 

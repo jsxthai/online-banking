@@ -1,4 +1,8 @@
-import { GET_RECIPIENT_LISTS } from "../constants/actionTypes";
+import {
+    GET_RECIPIENT_LISTS,
+    SET_ADD_RECIPIENT_FAIL,
+    SET_ADD_RECIPIENT_SUCCESS,
+} from "../constants/actionTypes";
 
 const initialState = {
     lists: [],
@@ -15,12 +19,12 @@ export default function recipientReducer(
                 ...state,
                 lists: payload.recipient,
             };
-        case "SET_ADD_RECIPIENT_FAIL":
+        case SET_ADD_RECIPIENT_FAIL:
             return {
                 ...state,
                 isAdd: false,
             };
-        case "SET_ADD_RECIPIENT_SUCCESS":
+        case SET_ADD_RECIPIENT_SUCCESS:
             return {
                 ...state,
                 isAdd: true,
