@@ -1,4 +1,3 @@
-import { Update } from "@material-ui/icons";
 import axios from "axios";
 
 const uri = process.env.REACT_APP_URI_SERVER || "http://localhost:7777";
