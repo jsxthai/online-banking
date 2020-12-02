@@ -19,7 +19,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import formatN from "../../helpers/formatNumber";
 
 const RecipientList = () => {
-    const recipientList = useSelector((state) => state.recipientLists.lists);
+    const recipientList = useSelector((state) => state.recipientLists);
     const accountNumber = useSelector(
         (state) => state.loginReducer["accountNumber"]
     );
@@ -37,8 +37,8 @@ const RecipientList = () => {
     }, []);
 
     useEffect(() => {
-        if (recipientList.length > 0) {
-            const row = recipientList.map((row, index) => (
+        if (recipientList.lists.length > 0) {
+            const row = recipientList.lists.map((row, index) => (
                 <TableRow key={row.number + index + 1}>
                     <TableCell component="th" scope="row">
                         {index + 1}
@@ -75,7 +75,7 @@ const RecipientList = () => {
         // console.log(type, row);
         if (type === "edit") {
             setStateAddOrEdit("edit");
-            setIsTable(!isTable);
+            setIsTable(false);
             setItemFocus(row);
             // handle edit
         } else if (type === "del") {
@@ -100,13 +100,18 @@ const RecipientList = () => {
             // check không có thay đổi thì ko update
             await dispatch(updateARecipient(accountNumber, itemFocus));
             dispatch(fetchRecipientLists(accountNumber));
+            setIsTable(!isTable);
         } else if (stateAddOrEdit === "add") {
-            //
+            // reset state adding: isAdd set false
+            await dispatch({ type: "SET_ADD_RECIPIENT_FAIL" });
+
             await dispatch(addRecipient(accountNumber, itemFocus));
             //  console.log("dis add", itemFocus);
+            if (recipientList.isAdd === true) {
+                console.log("s", recipientList.isAdd);
+                setIsTable(true);
+            }
         }
-
-        setIsTable(!isTable);
     };
 
     const onChangeInput = (e) => {

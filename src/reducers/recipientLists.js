@@ -12,9 +12,19 @@ export default function recipientReducer(
     switch (type) {
         case GET_RECIPIENT_LISTS:
             return {
+                ...state,
                 lists: payload.recipient,
             };
-
+        case "SET_ADD_RECIPIENT_FAIL":
+            return {
+                ...state,
+                isAdd: false,
+            };
+        case "SET_ADD_RECIPIENT_SUCCESS":
+            return {
+                ...state,
+                isAdd: true,
+            };
         default:
             return state;
     }

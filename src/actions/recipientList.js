@@ -30,13 +30,15 @@ export const addRecipient = (accountNumber, data) => async (dispatch) => {
         const response = await api.addRecipient(accountNumber, data);
         const payload = response.data;
         // console.log("oayload", payload);
-        if (payload.status !== 400) {
+        if (payload) {
             dispatch({ type: "GET_RECIPIENT_LISTS", payload: payload });
+            dispatch({ type: "SET_ADD_RECIPIENT_SUCCESS" });
         }
     } catch (error) {
         if (error.response.data.msg === "account recipient not found") {
             alert("Account recipient not found");
         }
+        dispatch({ type: "SET_ADD_RECIPIENT_FAIL" });
         console.log(error.response);
     }
 };
