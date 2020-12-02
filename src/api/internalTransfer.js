@@ -18,6 +18,8 @@ export const executeTransfer = (
     if (!typeTrans) {
         typeTrans = "transfer";
     }
+    // console.log("api", accountSource, accountDest, typeTrans, data);
+
     return axios.post(
         `${uri}/api/v2/internal-transfer/${accountSource}/${accountDest}?typeTrans=${typeTrans}`,
         {

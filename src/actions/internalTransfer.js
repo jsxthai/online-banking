@@ -13,6 +13,7 @@ export const executeTransfer = (
             typeTrans,
             data
         );
+        // console.log("action", accountSource, accountDest, typeTrans, data);
         const payload = response.data;
         if (payload.status === 201) {
             dispatch({ type: "EXECUTE_TRANSFER_SUCCESS", payload: payload });

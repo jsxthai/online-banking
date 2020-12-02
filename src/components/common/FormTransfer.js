@@ -13,6 +13,7 @@ import { hash } from "../../helpers/validateOtp";
 import { useDispatch } from "react-redux";
 import emailjs from "emailjs-com";
 import { init } from "emailjs-com";
+import { useCookies } from "react-cookie";
 const user_mail_id =
     process.env.REACT_APP_USER_MAIL_ID || "user_VsSTDePhTNnJM2kZfuqHf"; // test
 init(user_mail_id);
@@ -27,16 +28,37 @@ const defaultProps = {
 };
 
 const FormTransfer = (props) => {
+    const [cookie] = useCookies();
+    // console.log(cookie.accessToken);
     const dispatch = useDispatch();
+    const [infoForm, setInfoForm] = useState({
+        accountDest: "",
+        mount: "",
+        detail: "",
+    });
     const [selectRecipient, setSelectRecipient] = useState({
         number: "",
     });
+
+    // list html
     const [recipientLists, setRecipientLists] = useState("");
 
     const handleSelectRecipient = (e) => {
         setSelectRecipient({
             number: e.target.value,
         });
+        setInfoForm({
+            ...infoForm,
+            accountDest: e.target.value,
+        });
+    };
+
+    const handleChangeForm = (e) => {
+        setInfoForm({
+            ...infoForm,
+            [e.target.name]: e.target.value,
+        });
+        // console.log("info", infoForm);
     };
 
     const handleSubmitTransfer = async (e) => {
@@ -67,6 +89,19 @@ const FormTransfer = (props) => {
         } else {
             console.log("send mail FAILED...");
         }
+
+        // setup info ready execute transfer to server, after confirm otp
+        const infoExecute = {
+            accountSource: props.infoAccount.accountNumber,
+            accountDest: infoForm.accountDest,
+            mount: parseInt(infoForm.mount),
+            detail: infoForm.detail,
+            sign: cookie.accessToken || "inertnal bank",
+            date: Date.now(),
+        };
+        dispatch({ type: "SET_INFO_TRANSFER", payload: infoExecute });
+
+        // console.log("infoExecute", infoExecute);
     };
 
     useEffect(() => {
@@ -113,6 +148,9 @@ const FormTransfer = (props) => {
                     fullWidth
                     required
                     type="number"
+                    name="mount"
+                    value={infoForm.mount}
+                    onChange={handleChangeForm}
                 ></TextField>
                 <TextField
                     margin="normal"
@@ -120,6 +158,9 @@ const FormTransfer = (props) => {
                     fullWidth
                     multiline
                     rows={3}
+                    name="detail"
+                    value={infoForm.detail}
+                    onChange={handleChangeForm}
                 ></TextField>
                 <div style={{ height: "20px" }}></div>
                 <Button

@@ -19,6 +19,7 @@ export const hash = (otp, email, exp) => {
         const ttl = 1 * 60 * 1000; // 1 min // text
         exp = Date.now() + ttl;
     }
+    otp = parseInt(otp); // trường hợp số 0 đầu
 
     // data = dimawidma@gmail.com.822822.1989252556
     const data = `${email}.${otp}.${exp}`;
@@ -35,6 +36,7 @@ export const hash = (otp, email, exp) => {
 // originHash lưu state (store) để check
 // originHash = dajsdkasldasdakslda.1989252556
 export const verify = (otp, email, originHash) => {
+    otp = parseInt(otp);
     const [hash, exp] = originHash.split(".");
     const now = Date.now();
     // console.log(hash, parseInt(exp), now);

@@ -2,6 +2,7 @@ const initialState = {
     isWaitingOTP: false,
     isTransfer: false,
     hash: "",
+    infoExecute: {},
 };
 
 export default function internalTransfer(
@@ -37,6 +38,14 @@ export default function internalTransfer(
             return {
                 ...state,
                 isTransfer: false,
+            };
+
+        case "SET_INFO_TRANSFER":
+            return {
+                ...state,
+                infoExecute: {
+                    ...payload,
+                },
             };
         default:
             return state;
