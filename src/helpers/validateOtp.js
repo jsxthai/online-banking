@@ -8,7 +8,7 @@ import crypto from "crypto-js";
  *
  */
 
-const secretKey = process.env.SECRET_KET_OTP || "ioakdjaOTPlocal"; // test
+const secretKey = process.env.REACT_APP_SECRET_KET_OTP || "ioakdjaOTPlocal"; // test
 // console.log("sec", secretKey);
 
 // const ttl = 5 * 60 * 1000; // 5 minutes in milisecons

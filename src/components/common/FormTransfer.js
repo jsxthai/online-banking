@@ -13,7 +13,9 @@ import { hash } from "../../helpers/validateOtp";
 import { useDispatch } from "react-redux";
 import emailjs from "emailjs-com";
 import { init } from "emailjs-com";
-init("user_VsSTDePhTNnJM2kZfuqHf");
+const user_mail_id =
+    process.env.REACT_APP_USER_MAIL_ID || "user_VsSTDePhTNnJM2kZfuqHf"; // test
+init(user_mail_id);
 
 // PropTypes
 const propTypes = {
@@ -49,10 +51,10 @@ const FormTransfer = (props) => {
             otp: otp,
         };
 
-        console.log("target", e.target);
-        console.log("tem", templateParams);
-        const service_id = "service_gsfl6u3";
-        const template_id = "template_1k69xoo";
+        const service_id =
+            process.env.REACT_APP_SERVICE_MAIL_ID || "service_gsfl6u3"; // test
+        const template_id =
+            process.env.REACT_APP_TEMPLATE_MAIL_ID || "template_1k69xoo"; // test
 
         // sendForm => send
         const result = await emailjs.send(
@@ -60,15 +62,11 @@ const FormTransfer = (props) => {
             template_id,
             templateParams
         );
-        console.log("result ", result);
-        // .then(
-        //     (result) => {
-        //         console.log("Send mail SUCCESS", result.text);
-        //     },
-        //     (error) => {
-        //         console.log("Send mail FAILED", error.text);
-        //     }
-        // );
+        if (result) {
+            console.log("send mail SUCCESS ", result);
+        } else {
+            console.log("send mail FAILED...");
+        }
     };
 
     useEffect(() => {

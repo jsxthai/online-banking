@@ -8,7 +8,7 @@ import { fetchRecipientLists } from "../../actions/recipientList";
 
 const InternalTransfer = () => {
     const infoAccount = useSelector((state) => state.loginReducer);
-    const recipientLists = useSelector((state) => state.recipientLists);
+    const recipientLists = useSelector((state) => state.recipientLists.lists);
     const internalTransfer = useSelector((state) => state.internalTransfer);
     const [state, setState] = useState(false);
     const dispatch = useDispatch();
@@ -23,7 +23,7 @@ const InternalTransfer = () => {
         setState(internalTransfer.isWaitingOTP);
     }, [internalTransfer]);
 
-    console.log("is", internalTransfer);
+    // console.log("is", internalTransfer);
     return (
         <Grid item xs={12} sm={8} md={6}>
             <Title>Internal Transfer</Title>

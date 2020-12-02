@@ -13,6 +13,17 @@ export default function internalTransfer(
                 isWaitingOTP: true,
                 hash: payload,
             };
+        case "FINAL_TRANSFER":
+            return {
+                isWaitingOTP: false,
+                hash: "",
+            };
+
+        case "CANCEL_TRANSFER":
+            return {
+                isWaitingOTP: false,
+                hash: "",
+            };
         default:
             return state;
     }

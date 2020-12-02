@@ -9,7 +9,7 @@ export default function DashBoard() {
     const account = useSelector((state) => state.loginReducer["accountNumber"]);
     const accountLists = useSelector((state) => state.accountLists);
     const dispatch = useDispatch();
-    console.log("acc", accountLists);
+    // console.log("acc", accountLists);
     useEffect(() => {
         dispatch(fetchInfoAccount(account));
     }, [account]);
