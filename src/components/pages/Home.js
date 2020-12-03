@@ -9,6 +9,7 @@ import InterBank from "../InterBank";
 import DebtReminder from "../DebtReminder";
 import News from "../common/News";
 import RecipientList from "../RecipientList";
+import History from "../History";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -63,6 +64,7 @@ export default function Home() {
                                 exact
                                 component={RecipientList}
                             />
+                            <Route path="/history" exact component={History} />
                         </Switch>
                     </Grid>
                 </main>
