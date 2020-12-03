@@ -14,6 +14,7 @@ import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../../actions/logout";
 import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
+import TimelineIcon from "@material-ui/icons/Timeline";
 
 const useStyles = makeStyles((theme) => ({
     secondaryColor: {
@@ -29,6 +30,7 @@ export default function Menu() {
     let history = useHistory();
     const [isActive, setIsActive] = useState("");
     const classes = useStyles();
+    const dispatch = useDispatch();
 
     function handleClickDashBoard() {
         history.push("/dashboard");
@@ -50,7 +52,12 @@ export default function Menu() {
         history.push("/recipient-list");
         setIsActive("rec");
     }
-    const dispatch = useDispatch();
+
+    function handleClickHistory() {
+        history.push("/history");
+        setIsActive("his");
+    }
+
     function handleClickLogout() {
         dispatch(logout());
     }
@@ -106,6 +113,16 @@ export default function Menu() {
                         <PlaylistAddIcon />
                     </ListItemIcon>
                     <ListItemText primary={"Recipient List"} />
+                </ListItem>
+                <ListItem
+                    button
+                    onClick={handleClickHistory}
+                    className={isActive === "his" ? classes.activeColor : ""}
+                >
+                    <ListItemIcon>
+                        <TimelineIcon />
+                    </ListItemIcon>
+                    <ListItemText primary={"History"} />
                 </ListItem>
             </List>
 
