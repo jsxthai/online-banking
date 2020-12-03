@@ -12,7 +12,6 @@ const inititalState = {
 export default function history(state = inititalState, { type, payload }) {
     switch (type) {
         case GET_HISTORY_TRANSACTION_SUCCESS:
-            console.log("payload", payload);
             return {
                 ...state,
                 transactionLists: payload.trans,

@@ -11,11 +11,8 @@ import Title from "../common/Title";
 import { fetchHistory } from "../../actions/history";
 import { useDispatch, useSelector } from "react-redux";
 import dateFormat from "dateformat";
-import ImportExportIcon from "@material-ui/icons/ImportExport";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
-import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
-import { SwitchCamera } from "@material-ui/icons";
 import { InputLabel, MenuItem, Select } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
