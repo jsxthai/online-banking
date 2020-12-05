@@ -71,7 +71,11 @@ const History = () => {
                         ? key + 1 + (history.page - 1) * history.limit
                         : key + 1}
                 </TableCell>
-                <TableCell align="left">{item.accountDest}</TableCell>
+                <TableCell align="left">
+                    {item.accountDest === accountNumber
+                        ? `${item.accountDest} (myself)`
+                        : item.accountDest}
+                </TableCell>
                 <TableCell align="center">
                     <b>
                         {item.mount.toLocaleString("it-IT", {
