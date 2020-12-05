@@ -45,7 +45,7 @@ export default function SimpleCard(props) {
                     </Typography>
                     <Typography variant="body2" component="p"></Typography>
                     <div className={classes.flexContainer}>
-                        <p>{formatN(item.number)}</p>{" "}
+                        <p>{item.number}</p>{" "}
                         <b>
                             {item.mount.toLocaleString("it-IT", {
                                 // style: "currency",

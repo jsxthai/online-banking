@@ -43,7 +43,7 @@ const RecipientList = () => {
                     <TableCell component="th" scope="row">
                         {index + 1}
                     </TableCell>
-                    <TableCell align="left">{formatN(row.number)}</TableCell>
+                    <TableCell align="left">{row.number}</TableCell>
                     <TableCell align="left">{row.name}</TableCell>
                     <TableCell align="center">
                         <Button
