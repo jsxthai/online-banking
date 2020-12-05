@@ -44,10 +44,12 @@ export default function Menu() {
     //     history.push("/interbank");
     //     setIsActive("int");
     // }
-    function handleClickDebtReminder() {
-        history.push("/debt-reminder");
-        setIsActive("deb");
-    }
+
+    // function handleClickDebtReminder() {
+    //     history.push("/debt-reminder");
+    //     setIsActive("deb");
+    // }
+
     function handleClickRecipientList() {
         history.push("/recipient-list");
         setIsActive("rec");
@@ -94,7 +96,8 @@ export default function Menu() {
                     </ListItemIcon>
                     <ListItemText primary={"Interbank"} />
                 </ListItem> */}
-                <ListItem
+
+                {/* <ListItem
                     button
                     onClick={handleClickDebtReminder}
                     className={isActive === "deb" ? classes.activeColor : ""}
@@ -103,7 +106,8 @@ export default function Menu() {
                         <MoneyOffIcon />
                     </ListItemIcon>
                     <ListItemText primary={"Debt Reminder"} />
-                </ListItem>
+                </ListItem> */}
+
                 <ListItem
                     button
                     onClick={handleClickRecipientList}

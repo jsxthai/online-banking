@@ -15,6 +15,7 @@ import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import { InputLabel, MenuItem, Select } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import Pagination from "../common/Pagination";
 
 const useStyles = makeStyles({
     receiveColor: {
@@ -23,12 +24,19 @@ const useStyles = makeStyles({
     },
 });
 const History = () => {
+    let history = useSelector((state) => state.history);
     const classes = useStyles();
+    const pageSize = 10;
+    const totalRows = history.totalRows;
+    // let totalPages = Math.ceil(totalRows / pageSize);
+    // totalPages = Math.ceil(totalRows / pageSize);
+    const [totalPages, setTotalPages] = useState(
+        Math.ceil(totalRows / pageSize)
+    );
 
     const accountNumber = useSelector(
         (state) => state.loginReducer.accountNumber
     );
-    let history = useSelector((state) => state.history);
     const [rowsTable, setRowsTable] = useState("");
     const [filterLists, setFilterLists] = useState([]);
     const [selectType, setSelectType] = useState("all");
@@ -50,13 +58,18 @@ const History = () => {
         if (history.transactionLists.length > 0) {
             setFilterLists(history.transactionLists);
         }
-    }, [history.transactionLists]);
+        setTotalPages(Math.ceil(history.totalRows / pageSize));
+        // console.log("math", Math.ceil(history.totalRows / pageSize));
+    }, [history]);
 
     useEffect(() => {
         const rows = filterLists.map((item, key) => (
             <TableRow key={key}>
                 <TableCell component="th" scope="row">
-                    {key + 1}
+                    {/* {key + 1} */}
+                    {history.page >= 2
+                        ? key + 1 + (history.page - 1) * history.limit
+                        : key + 1}
                 </TableCell>
                 <TableCell align="left">{item.accountDest}</TableCell>
                 <TableCell align="center">
@@ -116,11 +129,12 @@ const History = () => {
         const value = e.target.value;
         setSelectType(value);
         if (value === "all") {
+            dispatch(fetchHistory(accountNumber, 1, pageSize));
             setFilterLists(history.transactionLists);
             return;
         }
         // filter
-        // value === type of data in database
+        dispatch(fetchHistory(accountNumber, 1, pageSize, value));
         const lists = history.transactionLists.filter((item) => {
             return item.typeTrans === value;
         });
@@ -130,6 +144,16 @@ const History = () => {
         });
     };
 
+    const handlePageChange = (pageNumber) => {
+        // console.log("page ch his", pageNumber);
+        if (selectType !== "all") {
+            dispatch(
+                fetchHistory(accountNumber, pageNumber, pageSize, selectType)
+            );
+        } else {
+            dispatch(fetchHistory(accountNumber, pageNumber, pageSize));
+        }
+    };
     return (
         <>
             <Grid item xs={12} sm={10} md={8}>
@@ -193,6 +217,10 @@ const History = () => {
                         </TableBody>
                     </Table>
                 </TableContainer>
+                <Pagination
+                    totalPages={totalPages}
+                    onPageChange={handlePageChange}
+                />
             </Grid>
         </>
     );
