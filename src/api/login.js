@@ -18,7 +18,7 @@ export const authLogin = (recaptchaToken, loginData) => {
         },
         {
             headers: {
-                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Origin": uri,
             },
         }
     );
