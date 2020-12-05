@@ -7,6 +7,9 @@ import {
 const inititalState = {
     transactionLists: [],
     isGet: false,
+    totalRows: 0,
+    page: 0,
+    limit: 0,
 };
 
 export default function history(state = inititalState, { type, payload }) {
@@ -15,6 +18,9 @@ export default function history(state = inititalState, { type, payload }) {
             return {
                 ...state,
                 transactionLists: payload.trans,
+                totalRows: payload.totalRows,
+                page: payload.page,
+                limit: payload.limit,
                 isFetch: true,
             };
 

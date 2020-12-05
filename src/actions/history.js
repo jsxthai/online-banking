@@ -5,9 +5,19 @@ import {
     GET_HISTORY_TRANSACTION_SUCCESS,
 } from "../constants/actionTypes";
 
-export const fetchHistory = (accountNumber) => async (dispatch) => {
+export const fetchHistory = (
+    accountNumber,
+    pageNumber,
+    limit,
+    typeTrans
+) => async (dispatch) => {
     try {
-        const response = await api.fetchHistory(accountNumber);
+        const response = await api.fetchHistory(
+            accountNumber,
+            pageNumber,
+            limit,
+            typeTrans
+        );
         const payload = response.data;
         if (payload) {
             dispatch({ type: CLEAR_GET_HISTORY });
