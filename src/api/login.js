@@ -1,5 +1,6 @@
 import axios from "axios";
 axios.defaults.withCredentials = true;
+axios.defaults.headers.post["Content-Type"] = "text/plain";
 
 const uri = process.env.REACT_APP_URI_SERVER || "http://localhost:7777";
 
