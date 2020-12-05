@@ -73,7 +73,7 @@ const History = () => {
                 </TableCell>
                 <TableCell align="left">
                     {item.accountDest === accountNumber
-                        ? `${item.accountDest} (myself)`
+                        ? `(myself)`
                         : item.accountDest}
                 </TableCell>
                 <TableCell align="center">
