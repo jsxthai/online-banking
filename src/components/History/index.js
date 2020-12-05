@@ -160,7 +160,9 @@ const History = () => {
                 <Title>My history transaction</Title>
                 <div style={{ height: "20px" }}></div>
 
-                <InputLabel id="label ">Type</InputLabel>
+                <InputLabel id="label ">Type transaction</InputLabel>
+                <div style={{ height: "10px" }}></div>
+
                 <Select
                     labelId="label"
                     id="select"
