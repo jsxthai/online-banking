@@ -16,7 +16,6 @@ import {
 } from "../../actions/recipientList";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
-import formatN from "../../helpers/formatNumber";
 
 const RecipientList = () => {
     const recipientList = useSelector((state) => state.recipientLists);

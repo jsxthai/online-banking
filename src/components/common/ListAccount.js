@@ -3,7 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-import formatN from "../../helpers/formatNumber";
 
 const useStyles = makeStyles({
     root: {
@@ -72,7 +71,7 @@ export default function SimpleCard(props) {
                     </Typography>
                     <Typography variant="body2" component="p"></Typography>
                     <div className={classes.flexContainer}>
-                        <p>{formatN(objAcc.accountNumber)}</p>{" "}
+                        <p>{objAcc.accountNumber}</p>{" "}
                         <b>
                             {objAcc.balance.toLocaleString("it-IT", {
                                 currency: "VND",
