@@ -156,7 +156,7 @@ const History = () => {
     };
     return (
         <>
-            <Grid item xs={12} sm={10} md={8}>
+            <Grid item xs={12} sm={10} md={10}>
                 <Title>My history transaction</Title>
                 <div style={{ height: "20px" }}></div>
 
