@@ -14,11 +14,11 @@ export const authLogin = (recaptchaToken, loginData) => {
         {
             recaptchaToken,
             loginData,
-        },
-        {
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-            },
         }
+        // {
+        //     headers: {
+        //         "Access-Control-Allow-Origin": "*",
+        //     },
+        // }
     );
 };
