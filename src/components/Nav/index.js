@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import clsx from "clsx";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -11,6 +11,7 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 import Menu from "../Menu";
 import { useSelector } from "react-redux";
@@ -84,6 +85,15 @@ export default function MiniDrawer() {
     const theme = useTheme();
     const [open, setOpen] = React.useState(true);
     const fullname = useSelector((state) => state.loginReducer.fullname);
+    const matches = useMediaQuery("(min-width:600px)");
+
+    useEffect(() => {
+        if (matches) {
+            setOpen(true);
+        } else {
+            setOpen(false);
+        }
+    }, [matches]);
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -92,6 +102,8 @@ export default function MiniDrawer() {
     const handleDrawerClose = () => {
         setOpen(false);
     };
+
+    // return <span>{`(min-width:600px) matches: ${matches}`}</span>;
 
     return (
         <>
