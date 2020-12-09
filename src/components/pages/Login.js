@@ -14,7 +14,7 @@ import { loginWithRecaptcha } from "../../actions/login";
 const Login = () => {
     const reRef = useRef(); // ref recaptcha
     const dispatch = useDispatch();
-
+    const [isLoading, setIsLoading] = useState(false);
     const [loginData, setLoginData] = useState(() => {
         return {
             username: "",
@@ -26,8 +26,9 @@ const Login = () => {
         e.preventDefault();
         const token = await reRef.current.executeAsync();
         reRef.current.reset();
-
-        dispatch(loginWithRecaptcha(token, loginData));
+        await setIsLoading(true);
+        await dispatch(loginWithRecaptcha(token, loginData));
+        await setIsLoading(false);
     };
 
     const onChangeInputLogin = (e) => {
@@ -111,6 +112,7 @@ const Login = () => {
                             color="primary"
                             type="submit"
                             variant="contained"
+                            disabled={isLoading}
                         >
                             Log in
                         </Button>

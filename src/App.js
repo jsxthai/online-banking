@@ -16,7 +16,6 @@ function App() {
     if (isLogin === false && accessToken) {
         // dispatch(renewToken());
         dispatch(loginWithJWT(accessToken));
-        return <h1>Loading ... </h1>;
     }
 
     return <>{isLogin === true && role === "user" ? <Home /> : <Login />}</>;
