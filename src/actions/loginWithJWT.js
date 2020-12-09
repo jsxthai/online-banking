@@ -21,7 +21,6 @@ export const loginWithJWT = (accessToken) => async (dispatch) => {
             });
         }
     } catch (error) {
-        alert("Incorrect username or password.");
         dispatch({
             type: SET_LOGIN_ERROR,
             payload: { status: 401 },
