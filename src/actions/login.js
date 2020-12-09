@@ -23,6 +23,7 @@ export const loginWithRecaptcha = (recaptchaToken, loginData) => async (
             });
         }
     } catch (error) {
+        alert("Incorrect username or password.");
         dispatch({
             type: SET_LOGIN_ERROR,
             payload: { status: 401 },

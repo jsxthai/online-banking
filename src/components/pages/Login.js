@@ -8,7 +8,7 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import Lock from "@material-ui/icons/Lock";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { loginWithRecaptcha } from "../../actions/login";
 
 const Login = () => {
@@ -21,17 +21,12 @@ const Login = () => {
             password: "",
         };
     });
-    const stateLogin = useSelector((state) => state.loginReducer);
     const onSubmitLogin = async (e) => {
         e.preventDefault();
         const token = await reRef.current.executeAsync();
         reRef.current.reset();
         await setIsLoading(true);
         await dispatch(loginWithRecaptcha(token, loginData));
-        console.log(stateLogin.isLogin);
-        if (!stateLogin.isLogin) {
-            alert("Incorrect username or password.");
-        }
         await setIsLoading(false);
     };
 
