@@ -49,7 +49,7 @@ export default function SimpleCard(props) {
                             {item.mount.toLocaleString("it-IT", {
                                 // style: "currency",
                                 currency: "VND",
-                            })}{" "}
+                            }) || 0}{" "}
                             VND
                         </b>
                     </div>
