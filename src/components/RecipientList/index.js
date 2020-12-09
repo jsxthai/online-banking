@@ -104,7 +104,7 @@ const RecipientList = () => {
             // reset state adding: isAdd set false
             await dispatch({ type: "SET_ADD_RECIPIENT_FAIL" });
 
-            await dispatch(addRecipient(accountNumber, itemFocus));
+            dispatch(addRecipient(accountNumber, itemFocus));
             //  console.log("dis add", itemFocus);
             if (recipientList.isAdd === true) {
                 console.log("s", recipientList.isAdd);
