@@ -1,16 +1,18 @@
 import Login from "./components/pages/Login";
 import Home from "./components/pages/Home";
 import { useDispatch, useSelector } from "react-redux";
-import { useCookies } from "react-cookie";
+// import { useCookies } from "react-cookie";
 import { loginWithJWT } from "./actions/loginWithJWT";
 // import { renewToken } from "./actions/renewToken";
+import Cookies from "js-cookie";
 
 function App() {
     const dispatch = useDispatch();
     const isLogin = useSelector((state) => state.loginReducer["isLogin"]);
     const role = useSelector((state) => state.loginReducer["role"]);
-    const [cookies] = useCookies(["accessToken"]);
-    let accessToken = cookies.accessToken;
+    // const [cookies] = useCookies(["accessToken"]);
+    // let accessToken = cookies.accessToken;
+    const accessToken = Cookies.get("accessToken"); // => undefined
 
     // use component will mount sẽ  ko phải render 2 lần khi đăng nhập bằng jwt token
     if (isLogin === false && accessToken) {
