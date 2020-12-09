@@ -15,7 +15,7 @@ export const loginWithRecaptcha = (recaptchaToken, loginData) => async (
         } else {
             const token = response.data.accessToken;
             const payload = jwt_decode(token);
-            // document.cookie = `accessToken=${token}`;
+            document.cookie = `accessToken=${token}`;
 
             dispatch({
                 type: SET_LOGIN_SUCCESS,
