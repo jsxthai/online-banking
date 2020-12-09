@@ -13,7 +13,7 @@ function App() {
     let accessToken = cookies.accessToken;
 
     // use component will mount sẽ  ko phải render 2 lần khi đăng nhập bằng jwt token
-    if (!isLogin && accessToken) {
+    if (isLogin === false && accessToken) {
         // dispatch(renewToken());
         dispatch(loginWithJWT(accessToken));
     }
