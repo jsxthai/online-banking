@@ -6,8 +6,11 @@ import { verify } from "../../helpers/validateOtp";
 import { useDispatch, useSelector } from "react-redux";
 import { executeTransfer } from "../../actions/internalTransfer";
 import { CANCEL_TRANSFER, FINAL_TRANSFER } from "../../constants/actionTypes";
+import { useCookies } from "react-cookie";
 
 const FormOtp = (props) => {
+    const [cookies] = useCookies(["accessToken"]);
+    let accessToken = cookies.accessToken;
     const [otp, setOtp] = useState("");
     const dispatch = useDispatch();
     const infoExecute = useSelector(
@@ -43,7 +46,8 @@ const FormOtp = (props) => {
                     infoExecute.accountSource,
                     infoExecute.accountDest,
                     infoExecute.typeTrans,
-                    data
+                    data,
+                    accessToken
                 )
             );
 

@@ -8,14 +8,16 @@ export const executeTransfer = (
     accountSource,
     accountDest,
     typeTrans,
-    data
+    data,
+    accessToken
 ) => async (dispatch) => {
     try {
         const response = await api.executeTransfer(
             accountSource,
             accountDest,
             typeTrans,
-            data
+            data,
+            accessToken
         );
         // console.log("action", accountSource, accountDest, typeTrans, data);
         const payload = response.data;

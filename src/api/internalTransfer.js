@@ -14,7 +14,8 @@ export const executeTransfer = (
     accountSource,
     accountDest,
     typeTrans,
-    data
+    data,
+    accessToken
 ) => {
     if (!typeTrans) {
         typeTrans = "transfer";
@@ -25,6 +26,7 @@ export const executeTransfer = (
         `${uri}/api/v2/internal-transfer/${accountSource}/${accountDest}?typeTrans=${typeTrans}`,
         {
             ...data,
+            accessToken,
         }
     );
 };
