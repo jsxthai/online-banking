@@ -73,7 +73,7 @@ export default function SimpleCard(props) {
                     <div className={classes.flexContainer}>
                         <p>{objAcc.accountNumber}</p>{" "}
                         <b>
-                            {objAcc.balance.toLocaleString("it-IT", {
+                            {(objAcc.balance || "0").toLocaleString("it-IT", {
                                 currency: "VND",
                             })}{" "}
                             VND
