@@ -36,6 +36,7 @@ export const addRecipient = (accountNumber, data) => async (dispatch) => {
         const payload = response.data;
         // console.log("oayload", payload);
         if (payload) {
+            alert("Add success");
             dispatch({ type: GET_RECIPIENT_LISTS, payload: payload });
             dispatch({ type: SET_ADD_RECIPIENT_SUCCESS });
         }
