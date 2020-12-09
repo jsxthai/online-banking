@@ -46,10 +46,10 @@ export default function SimpleCard(props) {
                     <div className={classes.flexContainer}>
                         <p>{item.number}</p>{" "}
                         <b>
-                            {item.mount.toLocaleString("it-IT", {
+                            {(item.mount || 0).toLocaleString("it-IT", {
                                 // style: "currency",
                                 currency: "VND",
-                            }) || 0}{" "}
+                            })}{" "}
                             VND
                         </b>
                     </div>
