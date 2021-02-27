@@ -1,10 +1,13 @@
 # Use website online
-Go [app](https://bank9.netlify.app/)
-Account for test: 
+Go [app client](https://bank9.netlify.app/)
+
+Go [app dashboad](https://admin-banking.netlify.app/) and repo [repo](https://github.com/jsxthai/ad-dashboard-banking)
+
+Account for user test: 
 * username: uu9
 * password: 000
 
-Account for test: 
+Account for user test: 
 * username: dx3
 * password: 333
 * 
